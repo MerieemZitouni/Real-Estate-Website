@@ -1,5 +1,5 @@
 from django.db import models
-
+import os
 
 class wilaya(models.TextChoices):
      adrar = '1'
@@ -122,7 +122,7 @@ class Personne(models.Model):
     nom = models.CharField(max_length=255)
     prenom = models.CharField(max_length=255)
     adresse = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255)
     telephone = models.CharField(max_length=255)
     est_administrateur = models.IntegerField(blank=True, null=True)
     est_utilisateur = models.IntegerField(blank=True, null=True)
@@ -144,11 +144,10 @@ class Messages(models.Model):
 
 class Photos(models.Model):
     idphotos = models.AutoField(primary_key=True)
-    photo = models.TextField() #blob stored as text
-
+    photo = models.ImageField(upload_to='images/')
     class Meta:
         managed = True
         db_table = 'photos'
-
-
-
+        
+        
+        
