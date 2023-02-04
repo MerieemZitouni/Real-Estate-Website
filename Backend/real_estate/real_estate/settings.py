@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'rest_framework',
+    'messages',
+    'rest_framework_gis',#google_maps_integration
+    'django.contrib.gis',#google_maps_integration
 ]
 
 MIDDLEWARE = [

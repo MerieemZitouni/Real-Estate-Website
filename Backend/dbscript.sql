@@ -260,7 +260,7 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `django_content_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client*/ ;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `django_content_type` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -278,7 +278,7 @@ CREATE TABLE `django_content_type` (
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
 INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(7,'app','annonce'),(8,'app','localisation'),(11,'app','messages'),(9,'app','personne'),(10,'app','photos'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(6,'sessions','session');
-/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS*/ ;
 UNLOCK TABLES;
 
 --

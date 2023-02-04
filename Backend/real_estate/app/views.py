@@ -1,8 +1,8 @@
 #views.py
 from django.shortcuts import render
 from rest_framework import generics, viewsets
-from .models import Annonce, Messages
-from .serializers import AnnonceSerializer, MessagesSerializer
+from .models import Annonce
+from .serializers import AnnonceSerializer
 
 class AnnonceViewSet(viewsets.ModelViewSet):
     queryset = Annonce.objects.all()
@@ -42,9 +42,14 @@ class SearchAiView(generics.ListAPIView):
         if start_date is not None and end_date is not None:
             queryset = queryset.filter(date_depot__range=(start_date, end_date))
 
-        return queryset
+        return queryset.order_by('-date_depot')
 
 
-class MessageViewSet(viewsets.ModelViewSet):
-    serializer_class = MessagesSerializer
-    queryset = Messages.objects.all()
+class LocalisationList(generics.ListCreateAPIView):
+    queryset = Localisation.objects.all()
+    serializer_class = LocalisationSerializer
+
+class LocalisationDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Localisation.objects.all()
+    serializer_class = LocalisationSerializer
+

@@ -1,6 +1,6 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Annonce, Localisation, Photos, Messages
+from .models import Annonce, Localisation, Photos
 
 
 
@@ -14,17 +14,13 @@ class LocalisationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Localisation
         fields = '__all__'
+        geo_field = 'point'
 
 class PhotosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photos
         fields = '__all__'
 
-
-class MessagesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Messages
-        fields = '__all__'
 
 
 
