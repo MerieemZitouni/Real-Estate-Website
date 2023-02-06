@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Annonce
 
 class Message(models.Model):
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='sender')

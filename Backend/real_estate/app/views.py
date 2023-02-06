@@ -44,6 +44,13 @@ class SearchAiView(generics.ListAPIView):
 
         return queryset.order_by('-date_depot')
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        if queryset.count() == 0:
+            return Response({"message": "No results found"})
+        serializer = AnnonceSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 class LocalisationList(generics.ListCreateAPIView):
     queryset = Localisation.objects.all()

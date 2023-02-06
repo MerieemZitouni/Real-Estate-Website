@@ -1,6 +1,6 @@
 from django.db import models
 import os 
-from django.contrib.gis.db import models
+#from django.contrib.gis.db import models
 
 
 class wilaya(models.TextChoices):
@@ -114,7 +114,7 @@ class Localisation(models.Model):
     wilaya = models.CharField(max_length=2,choices=wilaya.choices)
     commune = models.CharField(max_length=255)
     adresse = models.CharField(max_length=255)
-    position = models.PointField()
+    #position = models.PointField()
 
 
     class Meta:

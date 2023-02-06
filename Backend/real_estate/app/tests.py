@@ -1,5 +1,6 @@
 from selenium import webdriver
 from django.test import LiveServerTestCase
+import unittest
 
 class AnnonceCreationTest(LiveServerTestCase):
 
@@ -13,7 +14,7 @@ class AnnonceCreationTest(LiveServerTestCase):
         # Open the website
         self.browser.get(self.live_server_url)
 
-        # Click the create announcement button
+        # Click the "deposer annonce" button
         create_annonce_button = self.browser.find_element_by_id("create-annonce-button")
         create_annonce_button.click()
 
@@ -46,6 +47,46 @@ class AnnonceCreationTest(LiveServerTestCase):
         submit_button = self.browser.find_element_by_id("submit-button")
         submit_button.click()
 
-        # Check that the announcement was created successfully
+        # Check that the "announce" was created successfully
         success_message = self.browser.find_element_by_id("success-message")
         self.assertIn("Annonce créée avec succès", success_message.text)
+        
+
+class AnnonceDeleteTest(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Firefox()
+
+    def test_delete_annonce(self):
+        # Open the page with the AI list
+        self.driver.get("http://localhost:8000/api/annonces")
+        # Find the delete button for the first advertisement
+        delete_button = self.driver.find_element_by_css_selector("table tr:first-child td:last-child button")
+        # Click "supprimer" button
+        delete_button.click()
+        # Confirm the deletion
+        self.driver.switch_to.alert.accept()
+        # Check that the advertisement is no longer in the list
+        annonces = self.driver.find_elements_by_css_selector("table tr")
+        self.assertEqual(len(annonces), 0)
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+class SearchAiTest:
+    def setup_method(self):
+        self.driver = webdriver.Firefox()
+
+    def teardown_method(self):
+        self.driver.quit()
+
+    def test_search_annonce(self):
+        self.driver.get("http://localhost:8000/annonces/")
+        search_box = self.driver.find_element_by_id("search_box")
+        search_box.send_keys("Villa")
+        search_box.submit()
+        assert "No results found." not in self.driver.page_source
